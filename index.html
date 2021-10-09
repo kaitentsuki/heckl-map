@@ -40,10 +40,23 @@
 
 			padding: 35px 23px;
 
+			display: block;
 			max-width: 590px;
 			width: 100%;
 
+			opacity: 0;
+
+			transform: scale(0);
+			transform-origin: top right;
+
 			background: #F2F2F2;
+
+			transition: all 0.3s ease-in-out;
+		}
+
+		.contact-block.active {
+			opacity: 1;
+			transform: scale(1);
 		}
 
 		.contact-block.blue .contact-block__header, .contact-block.blue .contact-block__body {
@@ -185,14 +198,6 @@
 		.map-contact__text a {
 			color: #008DD0;
 		}
-
-		.contact-block {
-			display: none;
-		}
-
-		.contact-block.active {
-			display: block;
-		}
 	</style>
 </head>
 
@@ -203,6 +208,8 @@
             <style type="text/css">
                 .st0 {
 					fill: #BCBDC0;
+					stroke: #fff;
+					stroke-width: 1px;
 					transition: all 0.2s;
 				}
 
@@ -252,6 +259,33 @@
 					pointer-events: none;
 				}
 
+				.map .cursor path {
+					animation: 10s breathing forwards infinite;
+					transition: 1s all;
+				}
+
+				@keyframes breathing {
+					0% {
+						transform: scale(1);
+					}
+
+					25% {
+						transform: scale(1.15);
+					}
+
+					50% {
+						transform: scale(1);
+					}
+
+					75% {
+						transform: scale(1.15);
+					}
+
+					100% {
+						transform: scale(1);
+					}
+				}
+
 				.west, .east, .north {
 					cursor: pointer;
 				}
@@ -278,6 +312,13 @@
 
 				.north.hovered .st0, .north.active .st0 {
 					fill: #008DD0;
+				}
+
+				@media (max-width: 1050px) {
+					.map-wrapper {
+						grid-template-columns: 1fr;
+						grid-template-rows: auto auto;
+					}
 				}
             </style>
 		<defs>
@@ -1026,7 +1067,7 @@
 			Více informací
 		</a>
 
-		<div class="contact-block blue" data-contactArea="north">
+		<div class="contact-block blue active" data-contactArea="north">
 			<div class="contact-block__header">
 				<h3 class="contact-block__title">
 					PRAHA, STŘEDNÍ, VÝCHODNÍ
